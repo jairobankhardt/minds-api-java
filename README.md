@@ -7,8 +7,9 @@ What was used in this project:
 
 * Spring 
 * Java
+* Maven
 * Git
 * GitHub
 * Heroku
-* Eclipse IDE with Spring Tools
+* IntelliJ IDEA
 * Myself
