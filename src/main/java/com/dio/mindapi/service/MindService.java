@@ -8,6 +8,9 @@ import com.dio.mindapi.repository.MindRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class MindService {
 
@@ -27,5 +30,12 @@ public class MindService {
                 .builder()
                 .message("Created mind with ID " + savedMind.getIdMind())
                 .build();
+    }
+
+    public List<MindDTO> listAll() {
+        List<Mind> allMinds = mindRepository.findAll();
+        return allMinds.stream()
+                .map(mindMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

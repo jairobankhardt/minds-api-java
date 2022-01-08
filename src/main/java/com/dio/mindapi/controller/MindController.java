@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/minds")
@@ -24,5 +25,10 @@ public class MindController {
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createMind(@RequestBody @Valid MindDTO mindDTO) {
         return mindService.createMind(mindDTO);
+    }
+
+    @GetMapping
+    public List<MindDTO> listAll() {
+        return mindService.listAll();
     }
 }
