@@ -42,8 +42,17 @@ public class MindService {
     }
 
     public MindDTO findById(Long id) throws MindNotFoudException {
-        Mind mind = mindRepository.findById(id)
-                .orElseThrow(() -> new MindNotFoudException(id));
+        Mind mind = verifyIfExists(id);
         return mindMapper.toDTO(mind);
+    }
+
+    public void delete(Long id) throws MindNotFoudException {
+        verifyIfExists(id);
+        mindRepository.deleteById(id);
+    }
+
+    private Mind verifyIfExists(Long id) throws MindNotFoudException {
+        return mindRepository.findById(id)
+                .orElseThrow(() -> new MindNotFoudException(id));
     }
 }

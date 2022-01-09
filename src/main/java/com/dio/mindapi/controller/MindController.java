@@ -37,4 +37,10 @@ public class MindController {
     public MindDTO findById(@PathVariable Long id) throws MindNotFoudException {
         return mindService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteByID(@PathVariable Long id) throws MindNotFoudException {
+        mindService.delete(id);
+    }
 }
