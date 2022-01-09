@@ -28,10 +28,7 @@ public class MindService {
     public MessageResponseDTO createMind(MindDTO mindDTO) {
         Mind mindToSave = mindMapper.toModel(mindDTO);
         Mind savedMind = mindRepository.save(mindToSave);
-        return MessageResponseDTO
-                .builder()
-                .message("Created mind with ID " + savedMind.getIdMind())
-                .build();
+        return createMessageResponse("Created mind with ID ", savedMind.getIdMind());
     }
 
     public List<MindDTO> listAll() {
@@ -51,8 +48,23 @@ public class MindService {
         mindRepository.deleteById(id);
     }
 
+    public MessageResponseDTO updateById(Long id, MindDTO mindDTO) throws MindNotFoudException {
+        verifyIfExists(id);
+
+        Mind mindToUpdate = mindMapper.toModel(mindDTO);
+        Mind updatedMind = mindRepository.save(mindToUpdate);
+        return createMessageResponse("Update mind with ID ", updatedMind.getIdMind());
+    }
+
     private Mind verifyIfExists(Long id) throws MindNotFoudException {
         return mindRepository.findById(id)
                 .orElseThrow(() -> new MindNotFoudException(id));
+    }
+
+    private MessageResponseDTO createMessageResponse(String message, Long id) {
+        return MessageResponseDTO
+                .builder()
+                .message(message + id)
+                .build();
     }
 }

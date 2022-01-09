@@ -38,6 +38,11 @@ public class MindController {
         return mindService.findById(id);
     }
 
+    @PutMapping("/{id}")
+    public MessageResponseDTO updateById(@PathVariable Long id, @RequestBody @Valid MindDTO mindDTO) throws MindNotFoudException {
+        return mindService.updateById(id, mindDTO);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteByID(@PathVariable Long id) throws MindNotFoudException {
