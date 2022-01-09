@@ -3,12 +3,14 @@ package com.dio.mindapi.service;
 import com.dio.mindapi.dto.request.MindDTO;
 import com.dio.mindapi.dto.response.MessageResponseDTO;
 import com.dio.mindapi.entity.Mind;
+import com.dio.mindapi.exception.MindNotFoudException;
 import com.dio.mindapi.mapper.MindMapper;
 import com.dio.mindapi.repository.MindRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +39,11 @@ public class MindService {
         return allMinds.stream()
                 .map(mindMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public MindDTO findById(Long id) throws MindNotFoudException {
+        Mind mind = mindRepository.findById(id)
+                .orElseThrow(() -> new MindNotFoudException(id));
+        return mindMapper.toDTO(mind);
     }
 }

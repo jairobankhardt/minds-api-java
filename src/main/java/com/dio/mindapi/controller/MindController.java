@@ -2,6 +2,7 @@ package com.dio.mindapi.controller;
 
 import com.dio.mindapi.dto.request.MindDTO;
 import com.dio.mindapi.dto.response.MessageResponseDTO;
+import com.dio.mindapi.exception.MindNotFoudException;
 import com.dio.mindapi.service.MindService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,5 +31,10 @@ public class MindController {
     @GetMapping
     public List<MindDTO> listAll() {
         return mindService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public MindDTO findById(@PathVariable Long id) throws MindNotFoudException {
+        return mindService.findById(id);
     }
 }
