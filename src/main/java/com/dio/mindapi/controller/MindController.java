@@ -4,6 +4,7 @@ import com.dio.mindapi.dto.request.MindDTO;
 import com.dio.mindapi.dto.response.MessageResponseDTO;
 import com.dio.mindapi.exception.MindNotFoudException;
 import com.dio.mindapi.service.MindService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/minds")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MindController {
 
     private MindService mindService;
-
-    @Autowired
-    public MindController(MindService mindService) {
-        this.mindService = mindService;
-    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

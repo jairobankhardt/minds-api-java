@@ -6,24 +6,20 @@ import com.dio.mindapi.entity.Mind;
 import com.dio.mindapi.exception.MindNotFoudException;
 import com.dio.mindapi.mapper.MindMapper;
 import com.dio.mindapi.repository.MindRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MindService {
 
     private MindRepository mindRepository;
 
     private final MindMapper mindMapper = MindMapper.INSTANCE;
-
-    @Autowired
-    public MindService(MindRepository mindRepository) {
-        this.mindRepository = mindRepository;
-    }
 
     public MessageResponseDTO createMind(MindDTO mindDTO) {
         Mind mindToSave = mindMapper.toModel(mindDTO);
